@@ -2,7 +2,7 @@ resource "azurerm_resource_group" "azureresourcegroup" {
   name     = "MCIT_resource_group"
   location = "Canada Central"
 }
-resource "azurerm_public_ip" "example" {
+resource "azurerm_public_ip" "azrpubip" {
   name                = "PublicIPForLB"
   location            = "West US"
   resource_group_name = "${azurerm_resource_group.azureresourcegroup.name}"
@@ -16,6 +16,6 @@ resource "azurerm_lb" "example" {
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
-    public_ip_address_id = "${azurerm_public_ip.example.id}"
+    public_ip_address_id = "${azurerm_public_ip.azrpubip.id}"
   }
 }

@@ -2,7 +2,8 @@ locals{
   clusters_name= ["paul","saj","jade","douglas","emannuel","olarewaju","oladipupo"]
 }
 resource "azurerm_kubernetes_cluster" "azrk8sclst" {
-  name                = "example-aks1"
+  for_each            ={for cluster in local.cluster_names:cluster=>cluster}
+  name                = "${var.prefix}cluster-${each.key}
   location            = azurerm_resource_group.azureresourcegroup.location
   resource_group_name = azurerm_resource_group.azureresourcegroup.name
   dns_prefix          = "exampleaks1"
